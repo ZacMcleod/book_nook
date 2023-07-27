@@ -1,6 +1,6 @@
 from flask_marshmallow import Marshmallow
 from marshmallow import post_load, fields
-from database.models import User, Car
+from database.models import User, Car, Review, Favorite
 
 ma = Marshmallow()
 
@@ -59,3 +59,21 @@ cars_schema = CarSchema(many=True)
 
 
 # TODO: Add your schemas below
+
+class ReviewSchema(ma.Schema):
+    id = fields.Integer(primary_key=True)
+    book_id = fields.Integer()
+    text = fields.String()
+    rating = fields.Integer()
+    user_id = fields.Integer()
+    class Meta:
+        fields = ("id", "book_id", "text", "rating", "user_id")
+
+class FavoriteSchema(ma.Schema):
+    id = fields.Integer(primary_key=True)
+    book_id = fields.Integer()
+    title = fields.String()
+    thumbnail_url = fields.String()
+    user_id = fields.Integer()
+    class Meta:
+        fields = ("id", "book_id", "title", "thumbnail_url", "user_id")

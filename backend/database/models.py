@@ -26,8 +26,13 @@ class Review(db.Model):
     text = db.Column(db.String(255), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user_id"))
-review = Review()
-print(review.user.first_name)
+
+class Favorite(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    book_id = db.Column(db.Integer, nullable=False, unique=True)
+    title = db.Column(db.String(255), nullable=False)
+    thumbnail_url = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user_id"))
 
 
 class Car(db.Model):
