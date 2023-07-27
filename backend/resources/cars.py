@@ -4,7 +4,6 @@ from flask_restful import Resource
 from database.models import db, Car
 from database.schemas import car_schema, cars_schema
 
-
 class AllCarResource(Resource):
     def get(self):
         cars = Car.query.all()
