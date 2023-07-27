@@ -20,6 +20,20 @@ class User(db.Model):
     def __repr__(self):
         return self.username
     
+
+
+
+class Car(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    make = db.Column(db.String(255), nullable=False)
+    model = db.Column(db.String(255), nullable=False)
+    year = db.Column(db.Integer)
+    # Adds user_id as an Integer column on the car table which references the id column on user table
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    # Establishes object relation between car-user so we can grab values like car.user.username
+    user = db.relationship("User")
+
+# TODO: Add your models below, remember to add a new migration and upgrade database
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     book_id = db.Column(db.Integer, nullable=False, unique=True)
@@ -34,18 +48,3 @@ class Favorite(db.Model):
     thumbnail_url = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user_id"))
 
-
-class Car(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    make = db.Column(db.String(255), nullable=False)
-    model = db.Column(db.String(255), nullable=False)
-    year = db.Column(db.Integer)
-    # Adds user_id as an Integer column on the car table which references the id column on user table
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    # Establishes object relation between car-user so we can grab values like car.user.username
-    user = db.relationship("User")
-
-# TODO: Add your models below, remember to add a new migration and upgrade database
-
-class Book(db.Model):
-    id = db
