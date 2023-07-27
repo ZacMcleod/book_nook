@@ -79,3 +79,5 @@ class FavoriteSchema(ma.Schema):
     user_id = fields.Integer()
     class Meta:
         fields = ("id", "book_id", "title", "thumbnail_url", "user_id")
+
+favorites_schema = FavoriteSchema()

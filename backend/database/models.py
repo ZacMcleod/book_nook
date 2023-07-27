@@ -39,12 +39,13 @@ class Review(db.Model):
     book_id = db.Column(db.Integer, nullable=False, unique=True)
     text = db.Column(db.String(255), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("user_id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
 
 class Favorite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     book_id = db.Column(db.Integer, nullable=False, unique=True)
     title = db.Column(db.String(255), nullable=False)
     thumbnail_url = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("user_id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user = db.relationship("User")
 
