@@ -19,9 +19,6 @@ class User(db.Model):
 
     def __repr__(self):
         return self.username
-    
-
-
 
 class Car(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -48,4 +45,3 @@ class Favorite(db.Model):
     thumbnail_url = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     user = db.relationship("User")
-
