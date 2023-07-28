@@ -1,0 +1,399 @@
+{
+	"info": {
+		"_postman_id": "c32ebf17-8fb7-4805-a8f6-b0bc68057ecd",
+		"name": "Flask_JWT_Backend Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28034925",
+		"_collection_link": "https://winter-shuttle-812375.postman.co/workspace/661be3d2-f0a1-49e9-b653-67d3c8651acc/collection/28034925-c32ebf17-8fb7-4805-a8f6-b0bc68057ecd?action=share&creator=28034925&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "register_user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"bob\",\r\n    \"email\": \"bob@bob.bob\",\r\n    \"password\": \"password\",\r\n    \"first_name\": \"bob\",\r\n    \"last_name\": \"bobson\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/api/auth/register",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login_user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let token = pm.response.json().access\r",
+									"pm.collectionVariables.set(\"jwt\", token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"bob\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/api/auth/login",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cars",
+			"item": [
+				{
+					"name": "Post User Car (Protected)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3MzAyNDIwMiwianRpIjoiMTdmNGI3MGMtYTJjYi00MDcwLWE2Y2YtNGEzNDBhZGE0NTU2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE2NzMwMjQyMDIsImV4cCI6MTY3MzYyOTAwMn0.RkYdHAFagVCdtjTdGpyiDNfaTRJaufJR8AVUkDYNbCk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"make\": \"Kia\",\r\n    \"model\": \"Sorento\",\r\n    \"year\": 2000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/api/user_cars",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user_cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Cars (Protected)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3MzAyNDIwMiwianRpIjoiMTdmNGI3MGMtYTJjYi00MDcwLWE2Y2YtNGEzNDBhZGE0NTU2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE2NzMwMjQyMDIsImV4cCI6MTY3MzYyOTAwMn0.RkYdHAFagVCdtjTdGpyiDNfaTRJaufJR8AVUkDYNbCk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/api/user_cars",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user_cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Cars (Unprotected)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:5000/api/cars",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cars By Make (Unprotected)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3NDE2MDc5OSwianRpIjoiYjI4MTk4YTEtYTU5Yi00MGNlLTg3MDEtMDhiNTliYzQzOGY3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE2NzQxNjA3OTksImV4cCI6MTY3NDc2NTU5OSwiaWQiOjEsInVzZXJuYW1lIjoibW9icmllbiIsImZpcnN0X25hbWUiOiJNaWxlcyJ9.Uksfy1L7nnwCOnoFWYvv1cwEeB4BsZuL0KgZBr3kSBg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/cars?make=kia",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"cars"
+							],
+							"query": [
+								{
+									"key": "make",
+									"value": "kia"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "get_favorites",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5MDQ4OTkxNCwianRpIjoiNTZlNjYxMGItZTk5NC00NWQ4LWI0YjctYTRmM2EyNDQ4NzNlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE2OTA0ODk5MTQsImV4cCI6MTY5MTA5NDcxNCwiaWQiOjEsInVzZXJuYW1lIjoiYm9iIiwiZmlyc3RfbmFtZSI6ImJvYiJ9.Mi-gR_TU3kXeBNJM9YJ6bjh40NiJKoVZRXjZcyTNUVE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/user_favorites",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user_favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new_favorite",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer o87g98wgefouyg9aw783gorubyo87g9kus8l",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/user_favorites",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"user_favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new_review",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5MDU2OTA2NSwianRpIjoiZDNiMzNhYWUtZjg2ZS00ODkyLWJmMzEtMzU1YWY3YWU2ZTg4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE2OTA1NjkwNjUsImV4cCI6MTY5MTE3Mzg2NSwiaWQiOjEsInVzZXJuYW1lIjoiYm9iIiwiZmlyc3RfbmFtZSI6ImJvYiJ9.5BP-U4jfHpr7owA0A_1ajPzX9OihfisG8SGo-Xii-LI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"book_id\": \"labek\", \r\n    \"text\": \"Book\", \r\n    \"rating\": 3 \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/api/new_review",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"new_review"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "jwt",
+			"value": ""
+		}
+	]
+}
