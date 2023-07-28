@@ -12,7 +12,6 @@ from dotenv import load_dotenv
 from os import environ
 from resources.user_reviews import UserReviews
 from resources.user_favorites import UserFavoriteResource
-from resources.get_book_information import GetBookInformation
 
 # Adds variables from .env file to environment
 load_dotenv()
@@ -61,6 +60,6 @@ def create_routes():
     # TODO: Create files for your Resources in resources folder, add them here
     api.add_resource(UserReviews, '/api/new_review')
     api.add_resource(UserFavoriteResource, '/api/user_favorites')
-    api.add_resource(GetBookInformation, '/api/<int: book_id>')
+    
     
     return api
