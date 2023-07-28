@@ -62,22 +62,32 @@ cars_schema = CarSchema(many=True)
 
 class ReviewSchema(ma.Schema):
     id = fields.Integer(primary_key=True)
-    book_id = fields.Integer()
+    book_id = fields.String()
     text = fields.String()
     rating = fields.Integer()
     user_id = fields.Integer()
+    user = ma.Nested(UserSchema, many=False)
     class Meta:
-        fields = ("id", "book_id", "text", "rating", "user_id")
+        fields = ("id", "book_id", "text", "rating", "user_id", "user")
+    
+    @post_load
+    def create_review(self, data, **kwargs):
+        return Review(**data)
 
 review_schema = ReviewSchema()
 
 class FavoriteSchema(ma.Schema):
     id = fields.Integer(primary_key=True)
-    book_id = fields.Integer()
+    book_id = fields.String()
     title = fields.String()
     thumbnail_url = fields.String()
     user_id = fields.Integer()
+    user = ma.Nested(UserSchema, many=False)
     class Meta:
-        fields = ("id", "book_id", "title", "thumbnail_url", "user_id")
+        fields = ("id", "book_id", "title", "thumbnail_url", "user_id", "user")
+    
+    @post_load
+    def create_favorite(self, data, **kwargs):
+        return Favorite(**data)
 
 favorites_schema = FavoriteSchema()
