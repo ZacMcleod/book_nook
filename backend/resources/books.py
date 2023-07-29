@@ -11,14 +11,18 @@ class GetBookInformation(Resource):
         user_id = get_jwt_identity()
 
         reviews = Review.query.filter_by(body_id=book_id).all()
-        favorites = Favorite.query.filter_by(book_id=book_id).all()
-        average_rating = db.session.query(func.avg(Review.rating)).filter(Review.book_id == book_id).scalar()
-        user_favored = db.session.query(favorites.includes(user_id))
+        if reviews:
+            average_rating = sum([review.rating for review in reviews]) / len(reviews)
+        else:
+            average_rating = None
+
+        user_favorite = Favorite.query.filter_by(user_id=user_id, book_id=book_id).first()
+        is_favorited = user_favorite is not None
 
         response = {
         'reviews': review_schema.dump(reviews, many=True),
         'average_rating': average_rating,
-        'user_favored': user_favored
+        'is_favorited': is_favorited
 
         }
         return jsonify(response), 200
