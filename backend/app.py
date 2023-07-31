@@ -61,7 +61,7 @@ def create_routes():
     # TODO: Create files for your Resources in resources folder, add them here
     api.add_resource(UserReviews, '/api/new_review')
     api.add_resource(UserFavoriteResource, '/api/user_favorites')
-    api.add_resource(GetBookInformation, '/api/books/<int:book_id>')
+    api.add_resource(GetBookInformation, '/api/books/<book_id>')
     
     
     return api

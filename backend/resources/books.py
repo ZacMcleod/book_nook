@@ -10,7 +10,7 @@ class GetBookInformation(Resource):
     def get(self, book_id):
         user_id = get_jwt_identity()
 
-        reviews = Review.query.filter_by(body_id=book_id).all()
+        reviews = Review.query.filter_by(book_id=book_id).all()
         if reviews:
             average_rating = sum([review.rating for review in reviews]) / len(reviews)
         else:
@@ -23,6 +23,5 @@ class GetBookInformation(Resource):
         'reviews': review_schema.dump(reviews, many=True),
         'average_rating': average_rating,
         'is_favorited': is_favorited
-
         }
-        return jsonify(response), 200
+        return response, 200
