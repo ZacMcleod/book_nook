@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SearchBar from "../components/SearchBar/SearchBar";
 
 const useCustomForm = (initialValues = {}, onSubmit) => {
   const [formData, setFormValues] = useState(initialValues);
@@ -14,6 +15,7 @@ const useCustomForm = (initialValues = {}, onSubmit) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    <SearchBar />
     onSubmit(formData);
   };
 
