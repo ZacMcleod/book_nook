@@ -16,6 +16,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
+        <button onClick={() => navigate("/search")}>Search</button>
           {user ? (
             <button onClick={logoutUser}>Logout</button>
           ) : (
