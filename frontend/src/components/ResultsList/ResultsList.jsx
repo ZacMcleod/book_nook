@@ -1,14 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 const ResultsList = ({ searchResults }) => {
     return (
         <div>
-            <h3>Book Search Results:</h3>
+            <h3>Book Search Results:
+
+            </h3>
             {searchResults.map((items, index) => (
-                <div key={index}>
-                    <h4>{items.volumeInfo.title}</h4>
-                </div>
+                <Link to={`/details/${items.volumeInfo.title}`} key={index}> 
+                    <div>
+                        <h4>{items.volumeInfo.title}</h4>
+                    </div>
+                </Link>
             ))}
         </div>
       );
