@@ -9,7 +9,7 @@ const ResultsList = ({ searchResults }) => {
 
             </h3>
             {searchResults.map((items, index) => (
-                <Link to={`/details/${items.volumeInfo.title}`} key={index}> 
+                <Link to={`/details/${items.id}`} key={index}> 
                     <div>
                         <h4>{items.volumeInfo.title}</h4>
                     </div>
