@@ -24,7 +24,12 @@ const Navbar = () => {
           )}
         </li>
         <li>
-
+        <button onClick={() => navigate("/user_favorites")}>See Your Favorites</button>
+          {/* {user ? (
+            <button onClick={logoutUser}>Logout</button>
+            ) : (
+              <button onClick={() => navigate("/login")}>Login</button>
+            )} */}
         </li>
       </ul>
     </div>
