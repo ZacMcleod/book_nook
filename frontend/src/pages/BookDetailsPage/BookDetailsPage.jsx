@@ -61,6 +61,7 @@ const BookDetailsPage = (props) => {
                         Authorization : "Bearer " + token,
                     }
                 });
+                console.log(response);
                 setIsLoadingThree(false);
                 getReviewFavorites();
                 
