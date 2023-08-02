@@ -11,8 +11,10 @@ const BookDetailsPage = (props) => {
     const [bookDetails, setBookDetails] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [isLoadingToo, setIsLoadingToo] = useState(true);
+    const [isLoadingThree, setIsLoadingThree] = useState(true);
     const [reviewsFavorites, setReviewFavorites] = useState({});
     const [reviews, setReviews] = useState([{}]);
+
 
 
     const [user, token] = useAuth();
@@ -22,6 +24,7 @@ const BookDetailsPage = (props) => {
         getReviewFavorites();
     }, []);
 
+   
     const getBookDetails = async () => {
         try {
             let response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookId}`);
@@ -46,7 +49,27 @@ const BookDetailsPage = (props) => {
             }
         };
 
+        const handleButton = ( async (e) => {
+            e.preventDefault();
+            try {
+                let response = await axios.post('http://127.0.0.1:5000/api/user_favorites', {
+                    "book_id" : bookDetails.id, 
+                    "title" : bookDetails.volumeInfo.title, 
+                    "thumbnail_url": bookDetails.volumeInfo.imageLinks.thumbnail
+                }, {
+                    headers : {
+                        Authorization : "Bearer " + token,
+                    }
+                });
+                setIsLoadingThree(false);
+                getReviewFavorites();
+                
+            } catch (error) {
+                console.log("Error in handleButton", error)
+            }
 
+
+        })
 
     return (
         <div className='container'>
@@ -80,7 +103,7 @@ const BookDetailsPage = (props) => {
                         {reviewsFavorites.average_rating}
                     </p>
                     <p>
-                        {reviewsFavorites.is_favorited ?("This is a favorite of yours."):( <button>favorite</button>)}
+                        {reviewsFavorites.is_favorited ?("This is a favorite of yours."):( <button onClick={handleButton}>favorite</button>)}
                     </p>
                 </div> 
             )}
